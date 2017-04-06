@@ -24,7 +24,7 @@ ifup_{{interface}}:
     - require:
       - module: ifdown_{{interface}}
     - onchanges:
-      - network: {{interface}}
+      - module: ifdown_{{interface}}
 
 ifdown_wait_{{interface}}:
   module.wait:
@@ -37,5 +37,7 @@ ifup_wait_{{interface}}:
     - name: ip.up
     - iface: {{interface}}
     - iface_type: {{params.type|default(interfaces_defaults.type)}}
+    - watch:
+      - module: ifdown_wait_{{interface}}
 {%- endfor %}
 

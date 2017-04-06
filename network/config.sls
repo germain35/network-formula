@@ -72,7 +72,6 @@ system:
       - cmd: {{interface}}_wpa
     - watch_in:
       - module: ifdown_wait_{{interface}}
-      - module: ifup_wait_{{interface}}
   {%- endif %}
 
 {%- endfor %}
