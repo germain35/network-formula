@@ -10,4 +10,4 @@ network:
     type: eth
     proto: dhcp
     enable_ipv6: False
-    ipv6_autoconf: 'yes'
+    ipv6_autoconf: 'no'

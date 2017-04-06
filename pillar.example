@@ -4,10 +4,16 @@ network:
     wpa: True
   interfaces:
     eth0:
-      enabled: False
-      hotplug: True
+      enabled: True
+      hotplug: False
       proto: dhcp
-      enable_ipv6: False
+    eth1:
+      enabled: True
+      hotplug: False
+      proto: static
+      ipaddr: 192.168.1.49
+      netmask: 255.255.255.0
+      gateway: 192.168.1.1
     wlan0:
       enabled: False
       hotplug: True

@@ -31,12 +31,19 @@ system:
     - type: {{params.type|default(interfaces_defaults.type)}}
     - proto: {{params.proto|default(interfaces_defaults.proto)}}
     - enable_ipv6: {{params.enable_ipv6|default(interfaces_defaults.enable_ipv6)}}
-    - ipv6_autoconf: {{params.ipv6_autoconf|default(interfaces_defaults.ipv6_autoconf)}}
     {%- if params.proto|default('dhcp') == 'static' %}
-    - ipaddrs: {{params.ipaddrs}}
+    - ipaddr: {{params.ipaddr}}
+    {%- if params.netmask is defined %}
+    - netmask: {{params.netmask}}
+    {%- endif %}
+    {%- if params.gateway is defined %}
     - gateway: {{params.gateway}}
-      {%- if params.enable_ipv6|default(True) %}
-    - ipv6addrs: {{params.ipv6addrs}}
+    {%- endif %}
+    {%- if params.dns is defined %}
+    - dns: {{params.dns}}
+    {%- endif %}
+    {%- if params.enable_ipv6|default(True) %}
+    - ipv6_autoconf: 'yes'
       {%- endif %}
     {%- endif %}
     {%- if params.dns is defined %}
