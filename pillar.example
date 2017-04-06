@@ -20,4 +20,4 @@ network:
       proto: manual
       wpa:
         ssid: LeWifi
-        psk: password
+        psk: LeMotDePasse

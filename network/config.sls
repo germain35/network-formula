@@ -23,6 +23,23 @@ system:
   {#- if (params.type|default('eth') == 'eth') and (interface not in salt['grains.get']('hwaddr_interfaces').keys()) #}
     {# continue #}
   {#- endif #}
+  {%- if params.wpa is defined %}
+{{interface}}_wpa:
+  cmd.run:
+    - name: wpa_passphrase '{{params.wpa.ssid}}' '{{params.wpa.psk}}' > {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
+    - require:
+       - pkg: network_wpa_packages
+    - require_in:
+       - network: {{interface}}
+{{interface}}_wpa_secure:
+  file.line:
+    - name: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
+    - mode: delete
+    - match: '#psk'
+    - content: ''
+    - require:
+      - cmd: {{interface}}_wpa
+  {%- endif %}
 
 {{interface}}:
   network.managed:
@@ -52,33 +69,8 @@ system:
     {%- if params.mtu is defined %}
     - mtu: {{params.mtu}}
     {%- endif %}
-
-  {%- if params.wpa is defined  %}
-{{interface}}_network_wpa_conf:
-  file.line:
-    - name: {{network.conf_file}}
-    - mode: ensure
-    - indent: False
-    - after: 'iface {{interface}}'
-    - content: '    wpa-conf {{network.wpa_conf_dir}}/wpa_{{interface}}.conf'
-    - require:
-      - network: {{interface}}
-{{interface}}_wpa:
-  cmd.run:
-    - name: wpa_passphrase '{{params.wpa.ssid}}' '{{params.wpa.psk}}' > '{{network.wpa_conf_dir}}/wpa_{{interface}}.conf'
-    - require:
-       - pkg: network_wpa_packages
-       - file: {{interface}}_network_wpa_conf
-{{interface}}_wpa_secure:
-  file.line:
-    - name: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
-    - mode: delete
-    - match: '#psk'
-    - content: '' 
-    - require:
-      - cmd: {{interface}}_wpa
-    - watch_in:
-      - module: ifdown_wait_{{interface}}
-  {%- endif %}
+    {%- if params.wpa is defined %}
+    - wpa-conf: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
+    {%- endif %}
 
 {%- endfor %}
