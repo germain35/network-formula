@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+network:
+  system:
+    vlan: False
+    wpa: False
+  interfaces:
+    enabled: False
+    hotplug: True
+    type: eth
+    proto: dhcp
+    enable_ipv6: False
+    ipv6_autoconf: 'yes'

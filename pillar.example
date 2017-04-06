@@ -1,0 +1,17 @@
+network:
+  system:
+    vlan: False
+    wpa: True
+  interfaces:
+    eth0:
+      enabled: False
+      hotplug: True
+      proto: dhcp
+      enable_ipv6: False
+    wlan0:
+      enabled: False
+      hotplug: True
+      proto: manual
+      wpa:
+        ssid: LeWifi
+        psk: password

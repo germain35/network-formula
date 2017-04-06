@@ -1,0 +1,8 @@
+{% set network = salt['grains.filter_by']({
+    'Debian': {
+        'vlan_packages': ['vlan'],
+        'wpa_packages': ['wpasupplicant'],
+        'conf_file': '/etc/network/interfaces',
+        'wpa_conf_dir': '/etc/wpa_supplicant',
+    },
+}, grain='os_family', merge=salt['pillar.get']('network:lookup'), default='Debian') %}
