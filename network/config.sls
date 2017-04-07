@@ -69,11 +69,13 @@ system:
     {%- if params.mtu is defined %}
     - mtu: {{params.mtu}}
     {%- endif %}
-    {%- if params.type is defined and params.type == 'vlan' %}
+    {%- if params.type is defined %}
+      {%- if params.type == 'vlan' %}
     - use:
       - network: {{params.vlan_device|default(interface.split('.')[1])}}
     - require:
       - network: {{params.vlan_device|default(interface.split('.')[1])}}
+      {%- endif %}
     {%- endif %}
     {%- if params.wpa is defined %}
     - wpa-conf: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
