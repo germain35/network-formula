@@ -71,9 +71,9 @@ system:
     {%- endif %}
     {%- if params.type == 'vlan' %}
     - use:
-      - network: {{params.'vlan-raw-device'|default(interface.split('.')[1])}}
+      - network: {{params.vlan_device|default(interface.split('.')[1])}}
     - require:
-      - network: {{params.'vlan-raw-device'|default(interface.split('.')[1])}}
+      - network: {{params.vlan_device|default(interface.split('.')[1])}}
     {%- endif %}
     {%- if params.wpa is defined %}
     - wpa-conf: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
