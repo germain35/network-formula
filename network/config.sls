@@ -72,9 +72,9 @@ system:
     {%- if params.type is defined %}
       {%- if params.type == 'vlan' %}
     - use:
-      - network: {{params.vlan_device|default(interface.split('.')[1])}}
+      - network: {{params.vlan_device|default(interface.split('.')[0])}}
     - require:
-      - network: {{params.vlan_device|default(interface.split('.')[1])}}
+      - network: {{params.vlan_device|default(interface.split('.')[0])}}
       {%- endif %}
     {%- endif %}
     {%- if params.wpa is defined %}

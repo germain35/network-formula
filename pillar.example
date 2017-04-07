@@ -7,6 +7,14 @@ network:
       enabled: True
       hotplug: False
       proto: dhcp
+    eth0.123:
+      enabled: True
+      hotplug: False
+      type: vlan
+      proto: static
+      ipaddr: 192.168.1.49
+      netmask: 255.255.255.0
+      gateway: 192.168.1.1
     eth1:
       enabled: True
       hotplug: False
