@@ -11,6 +11,7 @@ network:
       enabled: True
       hotplug: False
       type: vlan
+      vlan_device: eth0
       proto: static
       ipaddr: 192.168.1.49
       netmask: 255.255.255.0
