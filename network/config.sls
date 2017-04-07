@@ -69,7 +69,7 @@ system:
     {%- if params.mtu is defined %}
     - mtu: {{params.mtu}}
     {%- endif %}
-    {%- if params.type is defined && params.type == 'vlan' %}
+    {%- if params.type is defined and params.type == 'vlan' %}
     - use:
       - network: {{params.vlan_device|default(interface.split('.')[1])}}
     - require:
