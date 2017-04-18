@@ -63,6 +63,9 @@ system:
     - ipv6_autoconf: 'yes'
       {%- endif %}
     {%- endif %}
+    {%- if params.search is defined %}
+    - search: {{params.search}}
+    {%- endif %}
     {%- if params.dns is defined %}
     - dns: {{params.dns}}
     {%- endif %}
