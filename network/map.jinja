@@ -1,4 +1,20 @@
-{% set network = salt['grains.filter_by']({
+# -*- coding: utf-8 -*-
+# vim: ft=jinja:ts=2:sw=2
+
+{% import_yaml "network/defaults.yaml" as default_settings %}
+
+{%- set os         = salt['grains.get']('os') %}
+{%- set osrelease  = salt['grains.get']('osrelease') %}
+{%- set oscodename = salt['grains.get']('oscodename') %}
+
+{## Merge in network pillar ##}
+{% set network_settings = salt['pillar.get'](
+  'network',
+  default=default_settings.network,
+  merge=True)
+%}
+
+{% set os_map = salt['grains.filter_by']({
     'Debian': {
         'vlan_packages': ['vlan'],
         'wpa_packages': ['wpasupplicant'],
@@ -6,3 +22,6 @@
         'wpa_conf_dir': '/etc/wpa_supplicant',
     },
 }, grain='os_family', merge=salt['pillar.get']('network:lookup'), default='Debian') %}
+
+{## Merge the flavor_map to the default settings ##}
+{% do salt['defaults.merge'](network_settings,os_map) %}

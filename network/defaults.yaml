@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 network:
+  manage_vlan: False
+  manage_wpa: False
   system:
-    vlan: False
-    wpa: False
-  interfaces:
+    apply_hostname: True
+    retain_settings: True
+    require_reboot: True
+  settings:
     enabled: False
     hotplug: True
     type: eth

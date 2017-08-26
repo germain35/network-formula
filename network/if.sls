@@ -1,10 +1,16 @@
-{% import_yaml "network/defaults.yaml" as default_settings %}
+{% from "network/map.jinja" import network_settings with context %}
+
+{%- set os         = salt['grains.get']('os') %}
+{%- set os_family  = salt['grains.get']('os_family') %}
+{%- set osrelease  = salt['grains.get']('osrelease') %}
+{%- set oscodename = salt['grains.get']('oscodename') %}
 
 include:
   - network.install
-  - network.config
+  - network.system
+  - network.interface
 
-{% set interfaces_defaults = default_settings.network.interfaces %}
+{% set interfaces_defaults = network_settings.settings %}
 {% set interfaces          = salt['pillar.get']('network:interfaces', {}) %}
 
 {%- for interface, params in interfaces.items() %}

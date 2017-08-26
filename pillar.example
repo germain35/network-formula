@@ -1,7 +1,11 @@
 network:
+  manage_vlan: False
+  manage_wpa: True
   system:
-    vlan: False
-    wpa: True
+    hostname: my.domain.fr
+    retain_settings: False
+    gateway: 192.168.1.1
+    gatewaydev: eth0
   interfaces:
     eth0:
       enabled: True

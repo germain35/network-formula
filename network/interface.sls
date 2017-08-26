@@ -1,23 +1,18 @@
-{% from "network/map.jinja" import network with context %}
-{% import_yaml "network/defaults.yaml" as default_settings %}
+{% from "network/map.jinja" import network_settings with context %}
+
+{%- set os         = salt['grains.get']('os') %}
+{%- set os_family  = salt['grains.get']('os_family') %}
+{%- set osrelease  = salt['grains.get']('osrelease') %}
+{%- set oscodename = salt['grains.get']('oscodename') %}
 
 include:
   - network.install
+  - network.system
   - network.if
 
-{% set settings = salt['pillar.get']('network:system', {}) %}
 
-{% if settings.fqdn is defined %}
-system:
-  network.system:
-    - enabled: True
-    - hostname: {{settings.fqdn}}
-    - apply_hostname: True
-    - retain_settings: True
-{% endif %}
-
-{% set interfaces_defaults = default_settings.network.interfaces %}
-{% set interfaces = salt['pillar.get']('network:interfaces', {}) %}
+{% set interfaces_defaults = network_settings.settings %}
+{% set interfaces          = salt['pillar.get']('network:interfaces', {}) %}
 
 {%- for interface, params in interfaces.items() %}
   {#- if (params.type|default('eth') == 'eth') and (interface not in salt['grains.get']('hwaddr_interfaces').keys()) #}
