@@ -10,7 +10,7 @@ include:
 
 {%- set settings = salt['pillar.get']('network_settings:system', {}) %}
 
-{%- if settings %}
+{%- if settings is defined %}
 system:
   network.system:
     - enabled: True

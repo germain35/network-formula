@@ -5,13 +5,13 @@
 {%- set osrelease  = salt['grains.get']('osrelease') %}
 {%- set oscodename = salt['grains.get']('oscodename') %}
 
-{% if network_settings.vlan %}
+{% if network_settings.manage_vlan %}
 network_vlan_packages:
   pkg.installed:
     - pkgs: {{network_settings.vlan_packages}}
 {% endif %}
 
-{% if network_settings.wpa %}
+{% if network_settings.manage_wpa %}
 network_wpa_packages:
   pkg.installed:
     - pkgs: {{network_settings.wpa_packages}}
