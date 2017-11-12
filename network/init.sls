@@ -1,4 +1,4 @@
-{% from "network/map.jinja" import network_settings with context %}
+{% from "network/map.jinja" import network with context %}
 
 include:
   - network.install

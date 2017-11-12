@@ -2,7 +2,7 @@
 # vim: ft=yaml
 network:
   manage_vlan: False
-  manage_wpa: False
+  manage_wireless: False
   system:
     apply_hostname: True
     retain_settings: True

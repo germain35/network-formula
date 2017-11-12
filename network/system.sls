@@ -1,4 +1,4 @@
-{% from "network/map.jinja" import network_settings with context %}
+{% from "network/map.jinja" import network with context %}
 
 {%- set os         = salt['grains.get']('os') %}
 {%- set os_family  = salt['grains.get']('os_family') %}
@@ -10,7 +10,7 @@
 include:
   - network.install
 
-{%- set settings = network_settings.system %}
+{%- set settings = network.system %}
 
 {%- if settings.hostname is defined %}
   {%- if salt['grains.get']('os_family') == 'Debian' %}

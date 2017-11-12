@@ -1,4 +1,4 @@
-{% from "network/map.jinja" import network_settings with context %}
+{% from "network/map.jinja" import network with context %}
 
 {%- set os         = salt['grains.get']('os') %}
 {%- set os_family  = salt['grains.get']('os_family') %}
@@ -10,7 +10,7 @@ include:
   - network.system
   - network.interface
 
-{% set interfaces_defaults = network_settings.settings %}
+{% set interfaces_defaults = network.settings %}
 {% set interfaces          = salt['pillar.get']('network:interfaces', {}) %}
 
 {%- for interface, params in interfaces.items() %}
