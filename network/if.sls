@@ -16,34 +16,34 @@ include:
 {%- for interface, params in interfaces.items() %}
 ifdown_{{interface}}:
   module.run:
-    - name: ip.down
-    - iface: {{interface}}
-    - iface_type: {{params.type|default(interfaces_defaults.type)}}
-    - onchanges:
-      - network: {{interface}}
+    - ip.down:
+      - iface: {{interface}}
+      - iface_type: {{params.type|default(interfaces_defaults.type)}}
+      - onchanges:
+        - network: {{interface}}
 
 ifup_{{interface}}:
   module.run:
-    - name: ip.up
-    - iface: {{interface}}
-    - iface_type: {{params.type|default(interfaces_defaults.type)}}
-    - require:
-      - module: ifdown_{{interface}}
-    - onchanges:
-      - module: ifdown_{{interface}}
+    - ip.up:
+      - iface: {{interface}}
+      - iface_type: {{params.type|default(interfaces_defaults.type)}}
+      - require:
+        - module: ifdown_{{interface}}
+      - onchanges:
+        - module: ifdown_{{interface}}
 
 ifdown_wait_{{interface}}:
   module.wait:
-    - name: ip.down
-    - iface: {{interface}}
-    - iface_type: {{params.type|default(interfaces_defaults.type)}}
+    - ip.down:
+      - iface: {{interface}}
+      - iface_type: {{params.type|default(interfaces_defaults.type)}}
 
 ifup_wait_{{interface}}:
   module.wait:
-    - name: ip.up
-    - iface: {{interface}}
-    - iface_type: {{params.type|default(interfaces_defaults.type)}}
-    - watch:
-      - module: ifdown_wait_{{interface}}
+    - ip.up:
+      - iface: {{interface}}
+      - iface_type: {{params.type|default(interfaces_defaults.type)}}
+      - watch:
+        - module: ifdown_wait_{{interface}}
 {%- endfor %}
 
