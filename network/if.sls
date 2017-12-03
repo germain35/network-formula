@@ -19,18 +19,18 @@ ifdown_{{interface}}:
     - ip.down:
       - iface: {{interface}}
       - iface_type: {{params.type|default(interfaces_defaults.type)}}
-      - onchanges:
-        - network: {{interface}}
+    - onchanges:
+      - network: {{interface}}
 
 ifup_{{interface}}:
   module.run:
     - ip.up:
       - iface: {{interface}}
       - iface_type: {{params.type|default(interfaces_defaults.type)}}
-      - require:
-        - module: ifdown_{{interface}}
-      - onchanges:
-        - module: ifdown_{{interface}}
+    - require:
+      - module: ifdown_{{interface}}
+    - onchanges:
+      - module: ifdown_{{interface}}
 
 ifdown_wait_{{interface}}:
   module.wait:
@@ -43,7 +43,7 @@ ifup_wait_{{interface}}:
     - ip.up:
       - iface: {{interface}}
       - iface_type: {{params.type|default(interfaces_defaults.type)}}
-      - watch:
-        - module: ifdown_wait_{{interface}}
+    - watch:
+      - module: ifdown_wait_{{interface}}
 {%- endfor %}
 
