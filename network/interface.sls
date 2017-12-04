@@ -51,6 +51,9 @@ include:
     {%- if params.gateway is defined %}
     - gateway: {{params.gateway}}
     {%- endif %}
+    {%- if params.broadcast is defined %}
+    - broadcast: {{params.broadcast}}
+    {%- endif %}
     {%- if params.dns is defined %}
     - dns: {{params.dns}}
     {%- endif %}
