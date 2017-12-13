@@ -8,7 +8,6 @@
 include:
   - network.install
   - network.system
-  - network.if
 
 
 {% set interfaces_defaults = network.settings %}
@@ -19,21 +18,33 @@ include:
     {# continue #}
   {#- endif #}
   {%- if params.wpa is defined %}
+    {%- if params.wpa.psk is defined %} 
 {{interface}}_wpa:
   cmd.run:
     - name: wpa_passphrase '{{params.wpa.ssid}}' '{{params.wpa.psk}}' > {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
     - require:
-       - pkg: network_wpa_packages
+       - pkg: network_wireless_packages
     - require_in:
        - network: {{interface}}
-{{interface}}_wpa_secure:
   file.line:
     - name: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
     - mode: delete
-    - match: '#psk'
-    - content: ''
-    - require:
-      - cmd: {{interface}}_wpa
+    - content: '#psk'
+    {%- else %}
+{{interface}}_wpa:
+  file.managed:
+    - name: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
+    - source: salt://network/templates/wpa_open.conf.jinja
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 0600
+    - makedirs: True
+    - context:
+        ssid: {{params.wpa.ssid}}
+    - require_in:
+      - network: {{interface}}
+    {%- endif %}
   {%- endif %}
 
 {{interface}}:
