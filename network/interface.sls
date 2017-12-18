@@ -81,6 +81,9 @@ include:
     {%- if params.mtu is defined %}
     - mtu: {{params.mtu}}
     {%- endif %}
+    {%- if params.noifupdown is defined %}
+    - noifupdown: {{params.noifupdown}} 
+    {%- endif %}
     {%- if params.type is defined %}
       {%- if params.type == 'vlan' %}
     - use:
