@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 network:
+  manage_metric: False
   manage_vlan: False
   manage_wireless: False
   system:
