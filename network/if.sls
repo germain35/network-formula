@@ -8,7 +8,7 @@
 include:
   - network.install
   - network.system
-  - network.interface
+  - network.interfaces
 
 {% set interfaces_defaults = network.settings %}
 {% set interfaces          = salt['pillar.get']('network:interfaces', {}) %}
