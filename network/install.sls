@@ -5,20 +5,26 @@
 {%- set osrelease  = salt['grains.get']('osrelease') %}
 {%- set oscodename = salt['grains.get']('oscodename') %}
 
-{% if network.manage_metric %}
+{%- if network.manage_metric %}
 network_metric_packages:
   pkg.installed:
     - pkgs: {{network.metric_packages}}
-{% endif %}
+{%- endif %}
 
-{% if network.manage_vlan %}
+{%- if network.manage_bridge %}
+network_bridge_packages:
+  pkg.installed:
+    - pkgs: {{network.bridge_packages}}
+{%- endif %}
+
+{%- if network.manage_vlan %}
 network_vlan_packages:
   pkg.installed:
     - pkgs: {{network.vlan_packages}}
-{% endif %}
+{%- endif %}
 
-{% if network.manage_wireless %}
+{%- if network.manage_wireless %}
 network_wireless_packages:
   pkg.installed:
     - pkgs: {{network.wireless_packages}}
-{% endif %}
+{%- endif %}

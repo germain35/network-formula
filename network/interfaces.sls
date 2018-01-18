@@ -54,6 +54,10 @@ include:
     - type: {{params.type|default(interfaces_defaults.type)}}
     - proto: {{params.proto|default(interfaces_defaults.proto)}}
     - enable_ipv6: {{params.enable_ipv6|default(interfaces_defaults.enable_ipv6)}}
+    {%- if params.bridge is defined %}
+    - bridge: {{params.bridge}}
+    - ports: {{params.ports}}
+    {%- endif %}
     {%- if params.proto|default('dhcp') == 'static' %}
     - ipaddr: {{params.ipaddr}}
     {%- if params.netmask is defined %}
