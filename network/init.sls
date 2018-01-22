@@ -3,4 +3,5 @@
 include:
   - network.install
   - network.system
-  - network.interfaces
+  - network.host
+  - network.interface
