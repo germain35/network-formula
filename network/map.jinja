@@ -14,8 +14,10 @@ that differ from whats in defaults.yaml
         'bridge_packages': ['bridge-utils'],
         'vlan_packages': ['vlan'],
         'wireless_packages': ['wireless-tools', 'wpasupplicant'],
+        'dhclient_packages': ['isc-dhcp-client'],
         'conf_file': '/etc/network/interfaces',
         'wpa_conf_dir': '/etc/wpa_supplicant',
+        'dhclient_conf_file': '/etc/dhcp/dhclient.conf',
     },
 }, grain='os_family', merge=salt['pillar.get']('network:lookup'), default='Debian') %}
 

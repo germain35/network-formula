@@ -28,3 +28,9 @@ network_wireless_packages:
   pkg.installed:
     - pkgs: {{network.wireless_packages}}
 {%- endif %}
+
+{%- if network.manage_dhclient %}
+network_dhclient_packages:
+  pkg.installed:
+    - pkgs: {{network.dhclient_packages}}
+{%- endif %}

@@ -5,6 +5,7 @@ network:
   manage_bridge: False
   manage_vlan: False
   manage_wireless: False
+  manage_dhclient: True
   system:
     apply_hostname: True
     retain_settings: True

@@ -3,5 +3,10 @@
 include:
   - network.install
   - network.system
-  - network.host
   - network.interface
+  {%- if network.hosts is defined %}
+  - network.host
+  {%- endif %}
+  {%- if network.dhclient is defined %}
+  - network.dhclient
+  {%- endif %}
