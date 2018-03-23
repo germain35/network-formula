@@ -4,6 +4,7 @@ network:
   manage_metric: False
   manage_bridge: False
   manage_vlan: False
+  manage_bond: False
   manage_wireless: False
   manage_dhclient: True
   system:

@@ -85,8 +85,41 @@ include:
     {%- if params.mtu is defined %}
     - mtu: {{params.mtu}}
     {%- endif %}
+    {%- if params.autoneg is defined %}
+    - autoneg: {{params.autoneg}}
+    {%- endif %}
+    {%- if params.speed is defined %}
+    - speed: {{params.speed}}
+    {%- endif %}
+    {%- if params.duplex is defined %}
+    - duplex: {{params.duplex}}
+    {%- endif %}
     {%- if params.metric is defined %}
     - metric: {{params.metric}} 
+    {%- endif %}
+    {%- if params.slaves is defined %}
+    - slaves: {{params.slaves|join(' ')}}
+    {%- endif %}
+    {%- if params.miimon is defined %}
+    - miimon: {{params.miimon}}
+    {%- endif %}
+    {%- if params.updelay is defined %}
+    - updelay: {{params.updelay}}
+    {%- endif %}
+    {%- if params.downdelay is defined %}
+    - downdelay: {{params.downdelay}}
+    {%- endif %}
+    {%- if params.use_carrier is defined %}
+    - use_carrier: {{params.use_carrier}}
+    {%- endif %}
+    {%- if params.xmit_hash_policy is defined %}
+    - xmit_hash_policy: {{params.xmit_hash_policy}}
+    {%- endif %}
+    {%- if params.arp_interval is defined %}
+    - arp_interval: {{params.arp_interval}}
+    {%- endif %}
+    {%- if params.lacp_rate is defined %}
+    - lacp_rate: {{params.lacp_rate}}
     {%- endif %}
     {%- if params.noifupdown is defined %}
     - noifupdown: {{params.noifupdown}} 
@@ -94,9 +127,12 @@ include:
     {%- if params.type is defined %}
       {%- if params.type == 'vlan' %}
     - use:
-      - network: {{params.vlan_device|default(interface.split('.')[0])}}
+      - network: {{params.network}}
     - require:
-      - network: {{params.vlan_device|default(interface.split('.')[0])}}
+      - network: {{params.network}}
+      {%- elif params.type == 'bond' %}
+    - require:
+      - network: {{params.slaves}}
       {%- endif %}
     {%- endif %}
     {%- if params.wpa is defined %}

@@ -23,6 +23,12 @@ network_vlan_packages:
     - pkgs: {{network.vlan_packages}}
 {%- endif %}
 
+{%- if network.manage_bond %}
+network_bond_packages:
+  pkg.installed:
+    - pkgs: {{network.bond_packages}}
+{%- endif %}
+
 {%- if network.manage_wireless %}
 network_wireless_packages:
   pkg.installed:
