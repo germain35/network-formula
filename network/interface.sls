@@ -100,6 +100,9 @@ include:
     {%- if params.slaves is defined %}
     - slaves: {{params.slaves|join(' ')}}
     {%- endif %}
+    {%- if params.mode is defined %}
+    - mode: {{params.mode}}
+    {%- endif %}
     {%- if params.miimon is defined %}
     - miimon: {{params.miimon}}
     {%- endif %}
