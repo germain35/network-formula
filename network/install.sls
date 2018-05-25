@@ -40,3 +40,9 @@ network_dhclient_packages:
   pkg.installed:
     - pkgs: {{network.dhclient_packages}}
 {%- endif %}
+
+{%- if network.manage_resolvconf %}
+network_resolvconf_packages:
+  pkg.installed:
+    - pkgs: {{network.resolvconf_packages}}
+{%- endif %}
