@@ -125,7 +125,25 @@ include:
     - lacp_rate: {{params.lacp_rate}}
     {%- endif %}
     {%- if params.noifupdown is defined %}
-    - noifupdown: {{params.noifupdown}} 
+    - noifupdown: {{params.noifupdown}}
+    {%- endif %}
+    {%- if params.pre_up_cmds is defined %}
+    - pre_up_cmds: {{params.pre_up_cmds}}
+    {%- endif %}
+    {%- if params.up_cmds is defined %}
+    - up_cmds: {{params.up_cmds}} 
+    {%- endif %}
+    {%- if params.post_up_cmds is defined %}
+    - post_up_cmds: {{params.post_up_cmds}}
+    {%- endif %}
+    {%- if params.pre_down_cmds is defined %}
+    - pre_down_cmds: {{params.pre_down_cmds}}
+    {%- endif %}
+    {%- if params.down_cmds is defined %}
+    - down_cmds: {{params.down_cmds}}
+    {%- endif %}
+    {%- if params.post_down_cmds is defined %}
+    - post_down_cmds: {{params.post_down_cmds}}
     {%- endif %}
     {%- if params.type is defined %}
       {%- if params.type == 'vlan' %}
@@ -141,5 +159,25 @@ include:
     {%- if params.wpa is defined %}
     - wpa-conf: {{network.wpa_conf_dir}}/wpa_{{interface}}.conf
     {%- endif %}
+    {%- if params.get('forceifupdown', False) %}
+    - watch_in:
+      - module: ifdown_{{interface}}
+      - module: ifup_{{interface}}
+    {%- endif %}
+
+ifdown_{{interface}}:
+  module.wait:
+    - ip.down:
+      - iface: {{interface}}
+      - iface_type: {{params.type|default(interfaces_defaults.type)}}
+
+ifup_{{interface}}:
+  module.wait:
+    - ip.up:
+      - iface: {{interface}}
+      - iface_type: {{params.type|default(interfaces_defaults.type)}}
+    - watch:
+      - module: ifdown_{{interface}}
 
 {%- endfor %}
+

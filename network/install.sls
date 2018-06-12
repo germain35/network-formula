@@ -46,3 +46,4 @@ network_resolvconf_packages:
   pkg.installed:
     - pkgs: {{network.resolvconf_packages}}
 {%- endif %}
+
