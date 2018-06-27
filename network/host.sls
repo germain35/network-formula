@@ -11,21 +11,21 @@ include:
 
 {%- if network.hosts is defined %}
 
-  {%- for host, ip in network.hosts.get('absent', {}).iteritems() %}
+  {%- for host, ip in network.hosts.get('absent', {}).items() %}
 host_absent_{{host}}:
   host.absent:
     - name: {{ host }}
     - ip: {{ ip }}
   {%- endfor %}
 
-  {%- for ip, hosts in network.hosts.get('only', {}).iteritems() %}
+  {%- for ip, hosts in network.hosts.get('only', {}).items() %}
 host_only_{{ip}}:
   host.only:
     - name: {{ ip }}
     - hostnames: {{ hosts }} 
   {%- endfor %}
 
-  {%- for host, ip in network.hosts.get('present', {}).iteritems() %}
+  {%- for host, ip in network.hosts.get('present', {}).items() %}
 host_present_{{host}}:
   host.present:
     - name: {{ host }} 

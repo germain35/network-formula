@@ -9,7 +9,7 @@ include:
   - network.install
   - network.system
 
-{%- for k, v in network.get('dhclient', {}).iteritems() %}
+{%- for k, v in network.get('dhclient', {}).items() %}
 network_dhclient_{{k}}:
   file.replace:
     - name: {{ network.dhclient_conf_file }}

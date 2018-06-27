@@ -180,4 +180,3 @@ ifup_{{interface}}:
       - module: ifdown_{{interface}}
 
 {%- endfor %}
-
