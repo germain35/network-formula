@@ -14,12 +14,13 @@ that differ from whats in defaults.yaml
         'bridge_packages': ['bridge-utils'],
         'vlan_packages': ['vlan'],
         'bond_packages': ['ifenslave'],
-        'wireless_packages': ['wireless-tools', 'wpasupplicant'],
+        'wireless_packages': ['wireless-tools', 'wpasupplicant', 'iw'],
         'dhclient_packages': ['isc-dhcp-client'],
         'resolvconf_packages': ['resolvconf'],
         'conf_file': '/etc/network/interfaces',
         'wpa_conf_dir': '/etc/wpa_supplicant',
         'dhclient_conf_file': '/etc/dhcp/dhclient.conf',
+        'rt_tables_file': '/etc/iproute2/rt_tables',
     },
 }, grain='os_family', merge=salt['pillar.get']('network:lookup'), default='Debian') %}
 
