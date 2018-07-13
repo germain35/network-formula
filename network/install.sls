@@ -35,6 +35,12 @@ network_wireless_packages:
     - pkgs: {{network.wireless_packages}}
 {%- endif %}
 
+{%- if network.manage_firmware %}
+network_firmware_packages:
+  pkg.installed:
+    - pkgs: {{network.firmware_packages}}
+{%- endif %}
+
 {%- if network.manage_dhclient %}
 network_dhclient_packages:
   pkg.installed:

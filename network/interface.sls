@@ -69,9 +69,6 @@ include:
     {%- if params.broadcast is defined %}
     - broadcast: {{params.broadcast}}
     {%- endif %}
-    {%- if params.dns is defined %}
-    - dns: {{params.dns}}
-    {%- endif %}
     {%- if params.enable_ipv6|default(True) %}
     - ipv6_autoconf: 'yes'
       {%- endif %}

@@ -8,7 +8,6 @@
 include:
   - network.install
   - network.system
-  - network.interface
 
 {% set tables = salt['pillar.get']('network:routing_tables', []) %}
 
