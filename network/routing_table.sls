@@ -9,9 +9,7 @@ include:
   - network.install
   - network.system
 
-{% set tables = salt['pillar.get']('network:routing_tables', []) %}
-
-{%- for table in tables %}
+{%- for table in network.get('routing_tables', []) %}
 network_routing_table_{{table}}:
   file.replace:
     - name: {{ network.rt_tables_file }}

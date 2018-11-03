@@ -13,10 +13,3 @@ network:
     apply_hostname: True
     retain_settings: True
     require_reboot: False
-  settings:
-    enabled: False
-    hotplug: True
-    type: eth
-    proto: dhcp
-    enable_ipv6: False
-    ipv6_autoconf: 'no'

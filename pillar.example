@@ -24,6 +24,7 @@ network:
       enabled: True
       hotplug: False
       proto: dhcp
+      type: eth
     eth0.123:
       enabled: True
       hotplug: False
@@ -36,6 +37,7 @@ network:
     eth1:
       enabled: True
       hotplug: False
+      type: eth
       proto: static
       ipaddr: 192.168.1.49
       netmask: 255.255.255.0
@@ -43,6 +45,7 @@ network:
     wlan0:
       enabled: False
       hotplug: True
+      type: eth
       proto: manual
       wpa:
         ssid: LeWifi

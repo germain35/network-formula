@@ -11,9 +11,7 @@ include:
   - network.interface
   - network.routing_table
 
-{% set routes = salt['pillar.get']('network:routes', {}) %}
-
-{%- for interface, routes in routes.items() %}
+{%- for interface, routes in network.get('routes', {}).items() %}
 network_route_{{interface}}:
   network.routes:
     - name: {{interface}}
