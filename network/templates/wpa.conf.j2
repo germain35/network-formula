@@ -1,0 +1,15 @@
+{%- for key, value in wpa_params.items() %}
+  {%- if key == 'network' %}
+    {%- if value.get('psk', False) %}
+      {%- set network = salt['cmd.run']('wpa_passphrase ' ~ value.ssid ~ ' ' ~ value.psk) %}
+{{network}}
+    {%- else %}
+network={
+        ssid="{{value.ssid}}"
+        key_mgmt=NONE
+}
+    {%- endif %}
+  {%- else %}
+{{key}}={{value}}
+  {%- endif %}
+{%- endfor %}

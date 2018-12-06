@@ -2,11 +2,13 @@ network:
   manage_metric: True
   manage_vlan: False
   manage_wireless: True
+
   system:
     hostname: my.domain.fr
     retain_settings: False
     gateway: 192.168.1.1
     gatewaydev: eth0
+
   hosts:
     only:
       10.0.0.1:
@@ -19,12 +21,13 @@ network:
     absent:
       server4.domain.com:
         - 192.168.1.7
+
   interfaces:
     eth0:
       enabled: True
       hotplug: False
-      proto: dhcp
       type: eth
+      proto: dhcp
     eth0.123:
       enabled: True
       hotplug: False
@@ -48,5 +51,21 @@ network:
       type: eth
       proto: manual
       wpa:
-        ssid: LeWifi
-        psk: LeMotDePasse
+        network:
+          ssid: LeWifi
+          psk: LeMotDePasse
+
+  routes:
+    eth0:
+      - name: secure_network
+        ipaddr: 10.2.0.0
+        netmask: 255.255.255.0
+        gateway: 10.1.0.3
+      - name: HQ_network
+        ipaddr: 10.100.0.0
+        netmask: 255.255.0.0
+        gateway: 10.1.0.10
+
+  routing_tables:
+    - table1
+    - table2
