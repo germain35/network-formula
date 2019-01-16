@@ -8,8 +8,11 @@ network:
   manage_wireless: False
   manage_firmware: False
   manage_dhclient: True
-  manage_resolvconf: False
+
   system:
     apply_hostname: True
     retain_settings: True
     require_reboot: False
+
+  resolvconf:
+    enabled: False

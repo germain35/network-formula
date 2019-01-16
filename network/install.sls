@@ -47,7 +47,7 @@ network_dhclient_packages:
     - pkgs: {{network.dhclient_packages}}
 {%- endif %}
 
-{%- if network.manage_resolvconf %}
+{%- if network.resolvconf.get('enabled', False) %}
 network_resolvconf_packages:
   pkg.installed:
     - pkgs: {{network.resolvconf_packages}}

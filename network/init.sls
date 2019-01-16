@@ -3,6 +3,9 @@
 include:
   - network.install
   - network.system
+  {%- if network.resolvconf.get('enabled', False) %}
+  - network.resolvconf
+  {%- endif %}
   {%- if network.routing_tables is defined %}
   - network.routing_table
   {%- endif %}
