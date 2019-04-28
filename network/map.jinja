@@ -10,6 +10,7 @@ that differ from whats in defaults.yaml
 ##}
 {% set os_family_map = salt['grains.filter_by']({
     'Debian': {
+        'netplug_packages': ['netplug'],
         'metric_packages': ['ifmetric'],
         'bridge_packages': ['bridge-utils'],
         'vlan_packages': ['vlan'],
@@ -19,6 +20,7 @@ that differ from whats in defaults.yaml
         'firmware_packages': ['firmware-realtek', 'firmware-atheros', 'firmware-iwlwifi'],
         'resolvconf_packages': ['resolvconf'],
         'resolvconf_conf_dir': '/etc/resolvconf/resolv.conf.d',
+        'resolvconf_interface_order_file': '/etc/resolvconf/interface-order',
         'conf_file': '/etc/network/interfaces',
         'wpa_conf_dir': '/etc/wpa_supplicant',
         'dhclient_conf_file': '/etc/dhcp/dhclient.conf',

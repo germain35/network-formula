@@ -5,6 +5,12 @@
 {%- set osrelease  = salt['grains.get']('osrelease') %}
 {%- set oscodename = salt['grains.get']('oscodename') %}
 
+{%- if network.manage_netplug %}
+network_netplug_packages:
+  pkg.installed:
+    - pkgs: {{network.netplug_packages}}
+{%- endif %}
+
 {%- if network.manage_metric %}
 network_metric_packages:
   pkg.installed:

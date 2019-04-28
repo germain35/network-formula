@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 network:
+  manage_netplug: False
   manage_metric: False
   manage_bridge: False
   manage_vlan: False
